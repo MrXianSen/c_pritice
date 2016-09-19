@@ -35,8 +35,51 @@ int string_match_simple(char *s, int len_s, char const *p, int len_p)
 
 /*
 	Rabin-Karp算法
-*/
-int string_match_rk(char *s, int len_s, char const *p, int len_p)
-{
+	@param T 主串
+	@param P 子串
+	@param d 基数
+	@param q 除数
+	@return
+			i  匹配成功，s中的开始位置
+			-1 匹配失败
 
+	t[s+1] = (d(t[s] - T[s+1] * h) + T[s + m + 1]) % q
+*/
+int string_match_rk(char *T, int n, char const *P, int m, int d, int q)
+{
+	int h = pow(d, m - 1);
+	int t[MAX];
+	int v;
+	t[0] = 0;
+	int p = 0;
+	for (int i = 0; i < m; i++)
+	{
+		p = (d * p + P[i]) % q;
+		t[0] = (d * t[0] + T[i]) % q;
+	}
+
+	for (int i = 0; i < n - m; i++)
+	{
+		if (p == t[i])
+		{
+			for (int j = 0; j < m; j++)
+			{
+				if (P[i] != T[j]) break;
+				else if (j == m - 1)
+				{
+					v = i;
+					return v;
+				}
+				else
+				{
+					i++;
+				}
+			}
+		}
+		if (i < n - m)
+		{
+			t[i + 1] = (d * (t[i] - T[i + 1] * h) + T[i + m + 1]) % q;
+		}
+	}
+	return -1;
 }

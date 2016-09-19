@@ -24,7 +24,20 @@ char *find_char(char const *source, char const *chars)
 	return NULL;
 }
 
-int del_substr(char *str, char const *substr)
+/*
+	×Ö·û´®·´×ª
+*/
+void reverse_string(char *string)
 {
-
+	char *end = string;
+	char *start = string;
+	while (*(end + 1) != '\0') *end++;
+	while (start < end)
+	{
+		char temp = *start;
+		*start = *end;
+		*end = temp;
+		start++;
+		end--;
+	}
 }

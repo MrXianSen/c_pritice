@@ -1,11 +1,8 @@
-#include "string_match.h"
-
+#include "HEAD.h"
 
 int main()
 {
-	char src[] = "ABCDEF";
-	char chars[] = "ABC";
-	printf("%d\n", string_match_simple(src, 6, chars, 3));
+	printf("%d\n", max_list(6, 5, 4, 3, 2, 9, -1));
 	system("PAUSE");
-	return 0;
+	return 0; 
 }
